@@ -81,7 +81,7 @@ jobs:
       - name: Install E2E Test Suite
         run: |
           git clone https://github.com/compucorp/membershipextras-e2e-tests.git --branch master
-          cd membershipextras-e2e-test
+          cd membershipextras-e2e-tests
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
           nvm install
           nvm use
