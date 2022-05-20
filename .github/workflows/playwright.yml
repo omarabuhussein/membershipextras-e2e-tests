@@ -43,6 +43,7 @@ jobs:
       - name: Installing ME suite extensions and Configure Shoreditch theme
         working-directory: ${{ env.CIVICRM_EXTENSIONS_DIR }}
         run: |
+          drush en -y node_export
           git clone --depth 1 https://github.com/compucorp/uk.co.compucorp.membershipextras.git
           git clone --depth 1 https://github.com/compucorp/uk.co.compucorp.manualdirectdebit.git
           cv en uk.co.compucorp.membershipextras uk.co.compucorp.manualdirectdebit
