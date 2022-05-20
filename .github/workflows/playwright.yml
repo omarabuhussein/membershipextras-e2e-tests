@@ -1,8 +1,10 @@
 name: E2E Tests
 
+on:
+  workflow_dispatch
+
 jobs:
   run-unit-tests:
-
     runs-on: ubuntu-latest
     container: compucorp/civicrm-buildkit:1.1.1-php7.2
 
@@ -59,7 +61,7 @@ jobs:
           drush en bootstrap -y
           drush vset theme_default bootstrap
 
-     - name: Generate CSS files for Shoreditch
+      - name: Generate CSS files for Shoreditch
         working-directory: ${{ env.CIVICRM_EXTENSIONS_DIR }}/org.civicrm.shoreditch
         run: |
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
