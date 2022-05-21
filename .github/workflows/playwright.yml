@@ -82,8 +82,7 @@ jobs:
         run: |
           git clone https://github.com/compucorp/membershipextras-e2e-tests.git --branch master
           cd membershipextras-e2e-tests
-          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-          nvm use
+          nvm use 14.19.3
           npm install
 
       - name: Run E2E tests
