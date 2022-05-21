@@ -22,12 +22,7 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
-    
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v3.2.0
-        with:
-          node-version: 12
-       
+
       - name: Config mysql database as per CiviCRM requirement
         run: echo "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));" | mysql -u root --password=root --host=mysql
 
@@ -87,6 +82,8 @@ jobs:
         run: |
           git clone https://github.com/compucorp/membershipextras-e2e-tests.git --branch master
           cd membershipextras-e2e-tests
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh
+          nvm use
           npm install
 
       - name: Run E2E tests
