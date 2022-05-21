@@ -9,7 +9,7 @@ jobs:
     container: compucorp/civicrm-buildkit:1.1.1-php7.2
 
     env:
-      SITE_URL: http://localhost:80
+
       CIVICRM_EXTENSIONS_DIR: site/web/sites/all/modules/civicrm/tools/extensions
 
     services:
@@ -30,7 +30,7 @@ jobs:
         run : amp config:set --mysql_dsn=mysql://root:root@mysql:3306
 
       - name: Build Drupal site
-        run: civibuild create drupal-clean --civi-ver 5.39.1 --cms-ver 7.78 --web-root $GITHUB_WORKSPACE/site --url ${{ env.SITE_URL }} --admin-pass admin
+        run: civibuild create drupal-clean --civi-ver 5.39.1 --cms-ver 7.78 --web-root $GITHUB_WORKSPACE/site --admin-pass admin
 
       - uses: compucorp/apply-patch@1.0.0
         env:
@@ -80,6 +80,7 @@ jobs:
 
       - name: Install E2E Test Suite
         run: |
+          amp test
           git clone https://github.com/compucorp/membershipextras-e2e-tests.git --branch master
           cd membershipextras-e2e-tests
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
