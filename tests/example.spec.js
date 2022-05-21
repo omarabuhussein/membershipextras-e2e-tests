@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 test('test', async ({ page }) => {
 
-  await page.goto('http://localhost/user');
+  await page.goto('http://localhost:7979/user');
   
   await page.waitForLoadState('domcontentloaded');
 
