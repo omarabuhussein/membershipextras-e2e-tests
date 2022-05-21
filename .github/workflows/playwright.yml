@@ -28,11 +28,6 @@ jobs:
 
       - name: Config amp
         run : amp config:set --mysql_dsn=mysql://root:root@mysql:3306
-        
-      - name: Install Playwright missing dependencies
-        run : |
-          sudo apt-get update
-          sudo apt-get install -y libxshmfence-dev
 
       - name: Build Drupal site
         run: civibuild create drupal-clean --civi-ver 5.39.1 --cms-ver 7.78 --web-root $GITHUB_WORKSPACE/site --url ${{ env.SITE_URL }}
@@ -90,6 +85,7 @@ jobs:
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
           nvm use
           npm install
+          npx playwright install-deps
 
       - name: Run E2E tests
         working-directory: membershipextras-e2e-tests
