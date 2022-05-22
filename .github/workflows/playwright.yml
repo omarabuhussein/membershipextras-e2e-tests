@@ -28,12 +28,11 @@ jobs:
 
       - name: Config amp
         run: |
-          systemctl --type=service
-          sudo service apache restart
+          service mysql restart
+          service apache2 restart
           amp config:set --mysql_dsn=mysql://root:root@mysql:3306
           amp config:get --httpd_restart_command=sudo service apache restart
           amp config:get --hosts_type=file
-          sudo service apache restart
           amp config:get
           amp test
 
