@@ -27,7 +27,9 @@ jobs:
         run: echo "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));" | mysql -u root --password=root --host=mysql
 
       - name: Config amp
-        run : amp config:set --mysql_dsn=mysql://root:root@mysql:3306
+        run: |
+          amp config:set --mysql_dsn=mysql://root:root@mysql:3306
+          amp test
 
       - name: Build Drupal site
         run: civibuild create drupal-clean --civi-ver 5.39.1 --cms-ver 7.78 --web-root $GITHUB_WORKSPACE/site --admin-pass admin
@@ -80,7 +82,6 @@ jobs:
 
       - name: Install E2E Test Suite
         run: |
-          amp test
           git clone https://github.com/compucorp/membershipextras-e2e-tests.git --branch master
           cd membershipextras-e2e-tests
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
